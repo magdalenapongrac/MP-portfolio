@@ -25,7 +25,7 @@ function toggle(img) {
   active = img;
 }
 
-function openSection(id) {
+function openSection(id, izPovijesti = false) {
   document.querySelectorAll('.radovi-section').forEach(sec => {
     sec.classList.add('hidden');
   });
@@ -34,7 +34,27 @@ function openSection(id) {
   target.classList.remove('hidden');
 
   target.scrollIntoView({ behavior: 'smooth' });
+
+  // Zapiši u povijest preglednika da "natrag" radi
+  if (!izPovijesti && id !== 'radovi') {
+    history.pushState({ section: id }, '');
+  }
 }
+
+// Reagiraj na "natrag" u pregledniku ili swipe na mobitelu
+window.addEventListener('popstate', (e) => {
+  if (e.state && e.state.section) {
+    openSection(e.state.section, true);
+    return;
+  }
+
+  // Ako je otvorena galerija, projekti ili video, vrati na radove
+  const otvorena = document.querySelector('.radovi-section:not(.hidden):not(#radovi)');
+  if (otvorena) {
+    openSection('radovi', true);
+  }
+});
+
 
 
 function sakrivaj() {
@@ -63,8 +83,14 @@ window.onload = function() {
   modal.id = 'modal';
   modal.className = 'fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50';
   modal.innerHTML = `
+    <div class="relative">
     <img id="modal-img" src="" class="max-h-[90vh] max-w-[90vw] object-contain cursor-pointer">
-  `;
+    <button aria-label="Zatvori"
+            class="absolute top-2 right-2 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 text-white text-2xl leading-none hover:bg-black/80 transition">
+      &times;
+    </button>
+  </div>
+`;
   document.body.appendChild(modal);
 
   // Funkcija za otvaranje slike

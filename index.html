@@ -7,7 +7,7 @@
     <script src="js.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body style="font-family:Arial, Helvetica, sans-serif; font-weight: lighter;">
 <section id="naslovna" class="text-gray-400 bg-white body-font flex-col min-h-screen justify-center pt-2"> 
   <header class="fixed top-0 left-0 w-full z-10 bg-white shadow">
   <div class="flex items-center justify-between px-6 py-4">
@@ -62,40 +62,46 @@
 </script>
 
        
-        <!-- Slika 1 -->
-<div class="flex justify-center">
-    <img src="PonMag.png" alt="Pongrac Magdalena" 
-         class="h-14 md:h-14 w-auto max-w-[90%] md:max-w-none mt-60">
-</div>
+ <!-- Naslovne slike -->
+<div class="min-h-screen flex flex-col justify-center md:min-h-0 md:block">
 
-<!-- Slika 2 -->
-<div class="flex justify-center mt-14">
-    <img src="portfolio.png" alt="portfolio" 
-         class="h-40 md:h-40 w-auto max-w-[90%] md:max-w-none">
+    <!-- Slika 1 -->
+    <div class="flex justify-center">
+        <img src="PonMag.png" alt="Pongrac Magdalena"
+             class="w-auto h-auto max-w-[85%] max-h-14 md:h-14 md:max-w-none md:max-h-none md:mt-80">
+    </div>
+
+    <!-- Slika 2 -->
+    <div class="flex justify-center mt-10 md:mt-24">
+        <img src="portfolio.png" alt="portfolio"
+             class="w-auto h-auto max-w-[90%] max-h-40 md:h-40 md:max-w-none md:max-h-none">
+    </div>
+
 </div>
 
 </section>    
 
 
-<section id="omeni" class="text-gray-400 bg-gray-200 body-font min-h-screen flex flex-col md:flex-row items-center justify-center gap-16 px-10 py-20">
+<section id="omeni" class="text-gray-400 bg-gray-200 body-font min-h-screen 
+flex flex-col md:flex-row items-center justify-center gap-16 px-2 py-30">
   
   <!-- Slike -->
-  <div class="flex flex-col items-center space-y-10">
-      <img src="omn.png" alt="" class="h-28 w-auto">
-      <img src="portret.png" alt="" 
-     class="w-full max-w-[12rem] md:max-w-[14rem] lg:max-w-[16rem] h-auto mt-10 md:mt-20">
-
+  <div class="flex flex-col items-center md:translate-y-20">
+      <img src="o meni-naslov.png" alt="" class="h-24 w-auto ">
+      <img src="omeni.png" alt="" 
+     class="w-full max-w-[12rem] md:max-w-[22rem] lg:max-w-[26rem] h-auto mt-6 md:mt-10">
+           <!-- w-full max-w-[18rem] md:max-w-[22rem] lg:max-w-[26rem] h-auto mt-10 md:mt-20-->
 
 
   </div> 
 
   <!-- Tekst -->
-  <p class="text-lg text-gray-700 font-bold max-w-md text-center md:text-left">
-      Studentica sam treće godine stučnog prijediplomskog studija Multimedija, oblikovanje i primjena na Sveučilištu Sjever u Varaždinu.
-     Trenutno radim na razvoju svojih
-       vještina u području video montaže i grafičkog dizajna,
-      s fokusom na estetiku, kompoziciju i vizualnu komunikaciju. Volim učiti kroz praktične projekte
-      i stalno unapređivati svoj kreativni izraz.
+  <p class="text-lg text-gray-700 max-w-md text-center md:text-left md:translate-y-10 px-6 md:px-0">
+      Mlada sam kreativna osoba s posebnim interesom za video, 
+      animaciju i grafički dizajn. Volim stvarati vizualni sadržaj, 
+      eksperimentirati različitim stilovima i tražiti jednostavna, 
+      ali efektivna rješenja. Ovaj portfolio je moj mali kreativni 
+      prostor za projekte, ideje i stvari koje volim stvarati.
   </p>
 
 </section>
@@ -103,20 +109,32 @@
 
 
 <section id="radovi" class="radovi-section min-h-screen flex flex-col items-center justify-center bg-white px-10 py-20">
-  <!-- Naslov -->
-  <img src="radovii.png" alt="Radovi" class="h-28 w-auto mt-20">
+
+  <!-- Naslov: mobitel -->
+<img src="radovi_mobile.png" alt="Radovi"
+     class="block md:hidden w-auto h-auto max-w-full max-h-28 mt-20">
+
+<!-- Naslov: desktop -->
+<img src="radovii.png" alt="Radovi"
+     class="hidden md:block h-28 w-auto mt-20">
 
   <!-- Slike -->
-  <div class="flex flex-col md:flex-row items-center gap-12 mt-20">
-    <img src="foto.png"
-         onclick="openSection('galerija')"
-         class="h-64 w-auto cursor-pointer hover:scale-110 transition duration-300">
-    <img src="gd.png"
-         onclick="openSection('projekti')"
-         class="h-64 w-auto cursor-pointer hover:scale-110 transition duration-300">
+  <div class="flex flex-col md:flex-row items-center gap-12 md:gap-32 mt-20">
+    
     <img src="videos.png"
          onclick="openSection('video')"
          class="h-64 w-auto cursor-pointer hover:scale-110 transition duration-300">
+
+   <img src="gd.png"
+         onclick="openSection('projekti')"
+         class="h-64 w-auto cursor-pointer hover:scale-110 transition duration-300">
+
+
+    <img src="foto.png"
+         onclick="openSection('galerija')"
+         class="h-64 w-auto cursor-pointer hover:scale-110 transition duration-300">
+   
+
   </div>
 </section>
 
@@ -124,10 +142,10 @@
 
 <section id="galerija" class="radovi-section hidden bg-white min-h-screen flex flex-col items-center justify-center space-y-12 p-10">
 
-  <img src="back.png"
+ <!-- <img src="back.png"
        onclick="openSection('radovi')"
        alt="Nazad"
-       class="fixed left-10 top-1/2 -translate-y-1/2 h-8 w-auto cursor-pointer hover:scale-110 transition z-20">
+       class="fixed left-10 top-1/2 -translate-y-1/2 h-8 w-auto cursor-pointer hover:scale-110 transition z-20"> -->
 
   <div class="grid grid-cols-3 gap-6">
     <img src="slika1.jpg" onclick="openModal(this)" class="h-48 w-full object-cover blur-sm opacity-60 cursor-pointer transition">
@@ -147,10 +165,10 @@
 
 <section id="projekti" class="radovi-section hidden bg-white min-h-screen flex flex-col items-center justify-center space-y-12 p-10">
 
-  <img src="back.png"
+  <!--<img src="back.png"
        onclick="openSection('radovi')"
        alt="Nazad"
-       class="fixed left-10 top-1/2 -translate-y-1/2 h-8 w-auto cursor-pointer hover:scale-110 transition z-20">
+       class="fixed left-10 top-1/2 -translate-y-1/2 h-8 w-auto cursor-pointer hover:scale-110 transition z-20"> -->
 
   <div class="grid grid-cols-3 gap-6">
     <img src="logo1.png" onclick="openModal(this)" class="h-48 w-full object-cover blur-sm opacity-60 cursor-pointer transition">
@@ -166,7 +184,7 @@
      <img src="gd1.jpg" onclick="openModal(this)" class="h-48 w-full object-cover blur-sm opacity-60 cursor-pointer transition">
     <img src="gd2.png" onclick="openModal(this)" class="h-48 w-full object-cover blur-sm opacity-60 cursor-pointer transition">
     <img src="gd3.jpg" onclick="openModal(this)" class="h-48 w-full object-cover blur-sm opacity-60 cursor-pointer transition">
-    <img src="gd4.jpg" onclick="openModal(this)" class="h-48 w-full object-cover blur-sm opacity-60 cursor-pointer transition">
+    <img src="hatar-odbojka.jpg" onclick="openModal(this)" class="h-48 w-full object-cover blur-sm opacity-60 cursor-pointer transition">
     <img src="gd5.png" onclick="openModal(this)" class="h-48 w-full object-cover blur-sm opacity-60 cursor-pointer transition">
     <img src="gd6.jpg" onclick="openModal(this)" class="h-48 w-full object-cover blur-sm opacity-60 cursor-pointer transition">
     <img src="gd7.png" onclick="openModal(this)" class="h-48 w-full object-cover blur-sm opacity-60 cursor-pointer transition">
@@ -175,14 +193,12 @@
   </div>
 </section>
 
-
-
 <section id="video" class="radovi-section hidden bg-white min-h-screen flex flex-col items-center justify-center space-y-12 p-10">
 
-  <img src="back.png"
+ <!-- <img src="back.png"
        onclick="openSection('radovi')"
        alt="Nazad"
-       class="fixed left-10 top-1/2 -translate-y-1/2 h-8 w-auto cursor-pointer hover:scale-110 transition z-20">
+       class="fixed left-10 top-1/2 -translate-y-1/2 h-8 w-auto cursor-pointer hover:scale-110 transition z-20">-->
 
      <div> <a href="https://drive.google.com/drive/folders/1ZeUlvzV_uUR0jQMLl9tIYDJ46Qpq7oxS?usp=sharing"
        target="_blank"><p class="text-lg text-gray-700 font-bold max-w-md text-center md:text-left">
@@ -190,7 +206,6 @@
       </a>
     </div>
 </section>
-
 
 
 
@@ -248,8 +263,4 @@
 
     
 </body>
-
 </html>
-
-
-
