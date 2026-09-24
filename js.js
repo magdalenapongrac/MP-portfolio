@@ -93,6 +93,15 @@ window.onload = function() {
   `;
   document.body.appendChild(modal);
 
+   // Preglednik ne smije sam skrolati/zumirati kad se prst miče po modalu
+  modal.style.touchAction = 'none';
+  modal.style.overscrollBehavior = 'contain';
+
+  // Za iPhone: blokiraj pomicanje stranice dok je prst na modalu
+  modal.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+  }, { passive: false });
+
   const modalImg = document.getElementById('modal-img');
   let slike = [];     // sve slike iz sekcije u kojoj si kliknula
   let trenutna = 0;   // koja je slika trenutno otvorena
@@ -108,10 +117,12 @@ window.onload = function() {
     slike = Array.from(img.closest('.grid').querySelectorAll('img'));
     prikazi(slike.indexOf(img));
     modal.classList.remove('hidden');
+     document.body.style.overflow = 'hidden'; 
   };
 
   function zatvori() {
     modal.classList.add('hidden');
+     document.body.style.overflow = ''; 
   }
 
   // Klik bilo gdje (i na iksić) zatvara
