@@ -84,30 +84,62 @@ window.onload = function() {
   modal.className = 'fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50';
   modal.innerHTML = `
     <div class="relative">
-    <img id="modal-img" src="" class="max-h-[90vh] max-w-[90vw] object-contain cursor-pointer">
-    <button aria-label="Zatvori"
-            class="absolute top-2 right-2 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 text-white text-2xl leading-none hover:bg-black/80 transition">
-      &times;
-    </button>
-  </div>
-`;
+      <img id="modal-img" src="" class="max-h-[90vh] max-w-[90vw] object-contain cursor-pointer">
+      <button aria-label="Zatvori"
+              class="absolute top-2 right-2 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 text-white text-2xl leading-none hover:bg-black/80 transition">
+        &times;
+      </button>
+    </div>
+  `;
   document.body.appendChild(modal);
 
-  // Funkcija za otvaranje slike
-  window.openModal = function(img) {
-    const modalImg = document.getElementById('modal-img');
-    modalImg.src = img.src;
-    modal.classList.remove('hidden');
+  const modalImg = document.getElementById('modal-img');
+  let slike = [];     // sve slike iz sekcije u kojoj si kliknula
+  let trenutna = 0;   // koja je slika trenutno otvorena
+
+  // Prikaži sliku po broju (nakon zadnje ide opet prva)
+  function prikazi(i) {
+    trenutna = (i + slike.length) % slike.length;
+    modalImg.src = slike[trenutna].src;
   }
 
-  // Klikom na modal sliku zatvori
-  modal.addEventListener('click', () => {
+  // Otvaranje slike
+  window.openModal = function(img) {
+    slike = Array.from(img.closest('.grid').querySelectorAll('img'));
+    prikazi(slike.indexOf(img));
+    modal.classList.remove('hidden');
+  };
+
+  function zatvori() {
     modal.classList.add('hidden');
+  }
+
+  // Klik bilo gdje (i na iksić) zatvara
+  modal.addEventListener('click', zatvori);
+
+  // Strelice na tipkovnici
+  document.addEventListener('keydown', (e) => {
+    if (modal.classList.contains('hidden')) return;
+    if (e.key === 'ArrowRight') prikazi(trenutna + 1);
+    if (e.key === 'ArrowLeft')  prikazi(trenutna - 1);
+    if (e.key === 'Escape')     zatvori();
   });
 
+  // Swipe na mobitelu
+  let startX = 0;
+  modal.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  modal.addEventListener('touchend', (e) => {
+    const razlika = e.changedTouches[0].clientX - startX;
+    if (Math.abs(razlika) > 50) {
+      if (razlika < 0) prikazi(trenutna + 1); // swipe ulijevo = sljedeća
+      else             prikazi(trenutna - 1); // swipe udesno = prethodna
+    }
+  });
 
 };
-
 
 
 
